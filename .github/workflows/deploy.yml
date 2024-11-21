@@ -19,7 +19,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  WEB_IMAGE: ghcr.io/xD33m/MOCCA-Hackathon
+  WEB_IMAGE: ghcr.io/xD33m/mocca-hackathon
 
 jobs:
   docker-build-and-push:
@@ -29,7 +29,7 @@ jobs:
       matrix:
         include:
           - dockerfile: ./frontend/Dockerfile
-            image: ghcr.io/xD33m/MOCCA-Hackathon
+            image: ghcr.io/xD33m/mocca-hackathon
             path: ./frontend
             name: frontend
     name: Build & deploy ${{ matrix.name }} image 🚀
