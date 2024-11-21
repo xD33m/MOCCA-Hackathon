@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DialogueComponent } from './dialogue/dialogue.component';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -20,11 +21,8 @@ export class AppComponent {
 
   prompt: string = '';
   imageUrl: string | null = null;
-  constructor(private http: HttpClient) {
-    this.http.get('/api/hello').subscribe((data) => {
-      console.log(data);
-    });
-  }
+
+  constructor(private apiService: ApiService) {}
 
   sendMessage() {
     if (!this.message || this.message.trim() === '') {
@@ -33,7 +31,7 @@ export class AppComponent {
     this.responseLoading = true;
 
     this.chats.push({ user: 'User', message: this.message });
-    this.http.post<string>('/api/chat', { message: this.message }).subscribe({
+    this.apiService.sendMessage(this.message).subscribe({
       next: (data: string) => {
         this.chats.push({ user: 'ChatGPT', message: data });
         this.message = '';
@@ -46,12 +44,15 @@ export class AppComponent {
     });
   }
 
-  onSubmit() {
-    this.http.post('/api/generate-image', { prompt: this.prompt }).subscribe(
+  onSubmit(prompt: string) {
+    this.prompt = prompt;
+    console.log('Sending command ', prompt);
+
+    this.apiService.generateImage(prompt).subscribe(
       (response: any) => {
         this.imageUrl = response.imageUrl;
       },
-      (error) => {
+      (error: any) => {
         console.error('Error generating image:', error);
       }
     );

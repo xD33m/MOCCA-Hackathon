@@ -18,5 +18,7 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-
-<app-dialogue> </app-dialogue>
+<app-dialogue (commandChange)="onSubmit($event)"> </app-dialogue>
+<h4>
+  {{ prompt }}
+</h4>

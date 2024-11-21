@@ -6,7 +6,11 @@
   >
     <path d="M 1 1 H 1 V 3 C 2 3 3 2 3 1 H 1" fill="#000000" />
   </svg>
-  <div class="microphone">
+  <div
+    class="microphone"
+    [class.recording]="this.voiceService.isListening"
+    (click)="toggleListening()"
+  >
     <img src="assets/microphone-icon.png" alt="Microphone Icon" />
   </div>
   <div class="logo">DaVinciDialogue</div>

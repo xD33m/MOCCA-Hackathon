@@ -7,7 +7,6 @@
 $background-color: #fdf4e3; // Light beige background
 $dark-gray: #aaaaaa; // Dark gray for placeholders
 
-
 // Header
 .header {
   background-color: var(--mat-sys-primary-container);
@@ -46,14 +45,39 @@ $dark-gray: #aaaaaa; // Dark gray for placeholders
     position: absolute;
     left: 40px;
     top: 60px;
-
+    &.recording {
+      border: 4px solid var(--mat-sys-error-container);
+      img {
+        animation: pulse 1.5s infinite;
+      }
+    }
     img {
       width: 40px;
       height: 40px;
     }
+
+    .square {
+      width: 36px;
+      height: 36px;
+      background: var(--mat-sys-error-container);
+    }
   }
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
 .separador:after {
   content: "";
