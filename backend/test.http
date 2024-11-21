@@ -1,0 +1,8 @@
+POST http://localhost:3000/api/chat
+Content-Type: application/json
+
+{
+  "messages": [{"role": "user", "content": "Hello, ChatGPT!"}],
+  "model": "gpt-4o",
+  "max_tokens": 150
+}

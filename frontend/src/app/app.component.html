@@ -227,6 +227,23 @@
       </svg>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
+      <div class="chat">
+
+        <input
+          type="text"
+          placeholder="Chat with GPT"
+          [(ngModel)]="message"
+          />
+          <button (click)="sendMessage()">Send</button>
+          @for (chat of chats; track chat) {
+            <p class="message">
+              <b>chat.user:</b> {{ chat.message }}
+            </p>
+          }
+          @if(responseLoading) {
+            <p>ChatGPT is thinking...</p>
+          }
+      </div>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
