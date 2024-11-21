@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,4 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AppComponent {
   title = 'DaVinciDialogue';
+
+  constructor(private http: HttpClient) {
+    this.http.get('/api/hello').subscribe(data => {
+      console.log(data);
+    });
+  }
 }
