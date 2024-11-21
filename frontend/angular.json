@@ -27,7 +27,8 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets"
             ],
             "styles": ["src/scss/custom-theme.scss", "src/styles.scss"],
             "scripts": []
@@ -59,8 +60,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-						"proxyConfig": "src/proxy.conf.json"
-					},
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "DaVinciDialogue:build:production"

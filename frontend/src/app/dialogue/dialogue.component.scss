@@ -1,0 +1,23 @@
+:host {
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+  border: 1px solid var(--mat-sys-outline-variant);
+  font: var(--mat-sys-body-large);
+}
+
+.header,
+.footer {
+  background: var(--mat-sys-primary-container);
+}
+
+.header {
+  height: 80px;
+  width: 100vw;
+  position: relative;
+  .svg {
+    position: absolute;
+    path {
+      fill: var(--mat-sys-primary-container);
+    }
+  }
+}
