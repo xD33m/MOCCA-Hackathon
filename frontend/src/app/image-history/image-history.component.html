@@ -1,0 +1,9 @@
+<div *ngIf="imageUrls && imageUrls.length > 0">
+  <h2>Generated Images:</h2>
+  <button (click)="clearHistory()">Clear History</button>
+  <div class="image-gallery">
+    <div *ngFor="let url of imageUrls" class="image-item">
+      <img [src]="url" alt="Generated Image" />
+    </div>
+  </div>
+</div>

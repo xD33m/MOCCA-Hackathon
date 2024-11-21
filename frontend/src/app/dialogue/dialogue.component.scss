@@ -4,7 +4,6 @@
   font: var(--mat-sys-body-large);
 }
 
-$background-color: #fdf4e3; // Light beige background
 $dark-gray: #aaaaaa; // Dark gray for placeholders
 
 
@@ -70,28 +69,5 @@ $dark-gray: #aaaaaa; // Dark gray for placeholders
 .content-container {
   display: flex;
   padding: 50px 50px;
-
-  .left-side {
-    flex-grow: 1;
-  }
-
-  .main-content {
-    flex-grow: 4;
-    background-color: $dark-gray;
-    height: 400px;
-    margin-right: 20px;
-  }
-
-  .side-thumbnails {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .thumbnail {
-      background-color: $dark-gray;
-      width: 80px;
-      height: 80px;
-      margin-bottom: 10px;
-    }
-  }
+  justify-content: space-around;
 }

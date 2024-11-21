@@ -1,0 +1,14 @@
+
+<form (ngSubmit)="onSubmit()">
+  <label for="prompt">Enter Image Prompt:</label>
+  <input type="text" id="prompt" [(ngModel)]="prompt" name="prompt" required />
+  <button type="submit" [disabled]="isLoading">Generate Image</button>
+</form>
+
+<div class="image-container">
+    <div *ngIf="isLoading">Generating image...</div>
+    <div *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="Generated Image" />
+    </div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+</div>

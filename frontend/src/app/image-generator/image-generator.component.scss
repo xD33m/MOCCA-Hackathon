@@ -1,0 +1,18 @@
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.image-container {
+    width: 700px;
+    height: 400px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border: 10px solid var(--mat-sys-primary-container);
+
+    img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: scale-down;
+    }
+}
