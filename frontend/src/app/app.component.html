@@ -237,7 +237,7 @@
           <button (click)="sendMessage()">Send</button>
           @for (chat of chats; track chat) {
             <p class="message">
-              <b>chat.user:</b> {{ chat.message }}
+              <b>{{chat.user}}:</b> {{ chat.message }}
             </p>
           }
           @if(responseLoading) {
