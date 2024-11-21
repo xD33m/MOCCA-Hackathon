@@ -132,6 +132,9 @@ jobs:
 
       - name: Run docker image
         run: docker compose up -d --build
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ENV: ${{ vars.ENV}}
 
       - name: Remove old unused image
         run: docker image prune -a -f --filter "label=name=hackathon"
