@@ -1,19 +1,19 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
-@use "./theme-colors";
+@use "./theme-colors" as DaVinciDialogueTheme;
 
 html {
   @include mat.theme(
     (
       color: (
         theme-type: light,
-        primary: theme-colors.$primary-palette,
-        tertiary: theme-colors.$tertiary-palette,
+        primary: DaVinciDialogueTheme.$primary-palette,
+        tertiary: DaVinciDialogueTheme.$tertiary-palette,
       ),
       typography: (
         plain-family: Roboto,
-        brand-family: Roboto,
+        brand-family: Cinzel,
         bold-weight: 900,
         medium-weight: 500,
         regular-weight: 300,
@@ -24,7 +24,7 @@ html {
 
   // Use high contrast light theme colors when users prefer contrast
   @media (prefers-contrast: more) {
-    @include theme-colors.high-contrast-overrides(light);
+    @include DaVinciDialogueTheme.high-contrast-overrides(light);
   }
 
   // Apply dark theme when users prefer a dark color scheme
@@ -32,8 +32,8 @@ html {
     @include mat.theme(
       (
         color: (
-          primary: theme-colors.$primary-palette,
-          tertiary: theme-colors.$tertiary-palette,
+          primary: DaVinciDialogueTheme.$primary-palette,
+          tertiary: DaVinciDialogueTheme.$tertiary-palette,
           theme-type: dark,
         ),
       )
@@ -41,7 +41,7 @@ html {
 
     // Use high contrast dark theme colors when users prefers a dark color scheme and contrast
     @media (prefers-contrast: more) {
-      @include theme-colors.high-contrast-overrides(dark);
+      @include DaVinciDialogueTheme.high-contrast-overrides(dark);
     }
   }
 }
