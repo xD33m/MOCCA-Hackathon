@@ -18,7 +18,6 @@ RUN curl -fsS https://dotenvx.sh/ | sh
 COPY ./package*.json ./
 RUN npm ci --omit=dev
 COPY --from=build /hackathon-server/dist ./src
-COPY --from=build /hackathon-server/.env.prod ./
 RUN npm install pm2 -g
 EXPOSE 3000
 CMD "pm2-runtime", "src/server.js", "--node-args='--es-module-specifier-resolution=node'"]
