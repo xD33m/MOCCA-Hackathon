@@ -20,4 +20,4 @@ RUN npm ci --omit=dev
 COPY --from=build /hackathon-server/dist ./src
 RUN npm install pm2 -g
 EXPOSE 3000
-CMD "pm2-runtime", "src/server.js", "--node-args='--es-module-specifier-resolution=node'"]
+CMD ["pm2-runtime", "src/server.js", "--node-args='--es-module-specifier-resolution=node'"]
