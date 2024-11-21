@@ -3,7 +3,7 @@ version: '3'
 services:
     hackathon-web:
         container_name: hackathon-web
-        image: ghcr.io/xD33m/hackathon-web:latest
+        image: ghcr.io/xd33m/mocca-hackathon:latest
         restart: unless-stopped
         labels:
             traefik.enable: true
