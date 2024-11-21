@@ -8,7 +8,7 @@ import { DialogueComponent } from './dialogue/dialogue.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatButtonModule, FormsModule, DialogueComponent],
+  imports: [MatButtonModule, FormsModule, DialogueComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -17,6 +17,9 @@ export class AppComponent {
   message: string = '';
   chats: { user: string; message: string }[] = [];
   responseLoading: boolean = false;
+
+  prompt: string = '';
+  imageUrl: string | null = null;
   constructor(private http: HttpClient) {
     this.http.get('/api/hello').subscribe((data) => {
       console.log(data);
@@ -41,5 +44,16 @@ export class AppComponent {
         this.responseLoading = false;
       },
     });
+  }
+
+  onSubmit() {
+    this.http.post('/api/generate-image', { prompt: this.prompt }).subscribe(
+      (response: any) => {
+        this.imageUrl = response.imageUrl;
+      },
+      (error) => {
+        console.error('Error generating image:', error);
+      }
+    );
   }
 }
