@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    hackathon-web:
+        container_name: hackathon-web
+        image: ghcr.io/xD33m/hackathon-web:latest
+        restart: unless-stopped
+        labels:
+            traefik.enable: true
+            traefik.http.routers.hackathon-web.entrypoints: https
+            traefik.http.services.hackathon-web.loadbalancer.server.port: 3000
+            traefik.http.routers.hackathon-web.rule: Host(`hackathon.lucask.dev`)
+        networks:
+            - web
+
+networks:
+  web:
+    external: true
