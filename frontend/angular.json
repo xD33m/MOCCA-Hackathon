@@ -28,8 +28,12 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/assets"
+              "src/assets",
+              "src/scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/scss"]
+            },
             "styles": ["src/scss/custom-theme.scss", "src/styles.scss"],
             "scripts": []
           },
