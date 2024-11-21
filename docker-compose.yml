@@ -13,6 +13,20 @@ services:
         networks:
             - web
 
+    hackathon-server:
+            container_name: hackathon-server
+            image: ghcr.io/xd33m/hackathon-server:latest
+            environment:
+                - OPENAI_API_KEY=${OPENAI_API_KEY}
+                - ENV=${ENV}
+            restart: unless-stopped
+            labels:
+                traefik.enable: true
+                traefik.http.routers.hackathon-server.entryPoints: https
+                traefik.http.services.hackathon-server.loadbalancer.server.port: 3000
+                traefik.http.routers.hackathon-server.rule: (Host(`hackathon.lucask.dev`) && PathPrefix(`/api`))
+            networks:
+                - web
 networks:
   web:
     external: true

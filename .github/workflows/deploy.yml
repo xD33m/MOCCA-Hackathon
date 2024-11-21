@@ -20,6 +20,7 @@ on:
 env:
   REGISTRY: ghcr.io
   WEB_IMAGE: ghcr.io/xd33m/mocca-hackathon
+  SERVER_IMAGE: ghcr.io/xd33m/hackathon-server
 
 jobs:
   docker-build-and-push:
@@ -28,6 +29,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - dockerfile: ./backend/Dockerfile
+            image: ghcr.io/xd33m/hackathon-server
+            path: ./backend
+            name: backend
           - dockerfile: ./frontend/Dockerfile
             image: ghcr.io/xd33m/mocca-hackathon
             path: ./frontend
@@ -108,6 +113,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull latest server image
+        run: |
+          if [ "${{ (github.event_name == 'push' && github.ref_name == 'main') || (github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main') }}" = "true" ]; then
+            docker pull ${{ env.SERVER_IMAGE }}:latest
+          else
+            docker pull ${{ env.SERVER_IMAGE }}:${{ github.event.inputs.branch || github.ref_name }}
+          fi
 
       - name: Pull latest web image
         run: |
