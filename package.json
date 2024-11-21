@@ -3,14 +3,17 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-      "start": "concurrently -p \"[{name}]\" -n \"Server,Client\" -c \"auto,auto\" --kill-others-on-fail \"cd backend && npm run dev\" \"cd frontend && npm run start\"",
-      "postinstall": "cd backend && npm install && cd ../frontend && npm install && cd .."
+        "start": "concurrently -p \"[{name}]\" -n \"Server,Client\" -c \"auto,auto\" --kill-others-on-fail \"cd backend && npm run dev\" \"cd frontend && npm run start\"",
+        "postinstall": "cd backend && npm install && cd ../frontend && npm install && cd .."
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "homepage": "https://hexguess.kellerkind.dev/",
     "dependencies": {
-      "concurrently": "^8.2.2"
+        "concurrently": "^8.2.2"
+    },
+    "devDependencies": {
+        "@types/node": "^22.9.1"
     }
-  }
+}
