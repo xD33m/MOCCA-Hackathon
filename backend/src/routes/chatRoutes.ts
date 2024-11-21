@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import express from 'express';
 import { sendMessageToChatGPT } from '../services/chatgptService.js';
+import { generateImage } from '../services/chatgptService.js';
 
 const router = express.Router();
 
 router.post('/chat', async (req, res: any) => {
   const { message } = req.body;
-  console.log(req.body);
   const messages = message ? [{ role: 'user', content: message }] : req.body.messages;
 
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
@@ -21,5 +21,22 @@ router.post('/chat', async (req, res: any) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+router.post('/generate-image', async (req, res: any) => {
+  const { prompt } = req.body;
+
+  if (!prompt) {
+    return res.status(400).json({ error: 'Prompt is required' });
+  }
+
+  try {
+    const imageUrl = await generateImage(prompt);
+    res.status(200).json({ imageUrl });
+  } catch (error: any) {
+    console.error('Error in /api/generate-image:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 export default router;

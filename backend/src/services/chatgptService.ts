@@ -29,3 +29,23 @@ export async function sendMessageToChatGPT(
         throw new Error(error.response?.data?.error?.message || 'ChatGPT API error');
     }
 }
+
+export async function generateImage(prompt: string): Promise<string> {
+    if (!process.env.OPENAI_API_KEY) {
+        throw new Error('OpenAI API key is not configured in the environment.');
+    }
+
+    try {
+        const response = await openai.images.generate({
+            prompt: prompt,
+            n: 1,
+            size: '256x256',
+        });
+
+        // Return the URL of the generated image
+        return response.data[0].url;
+    } catch (error: any) {
+        console.error('Error generating image:', error.response?.data || error.message);
+        throw new Error(error.response?.data?.error?.message || 'Image generation error');
+    }
+}
