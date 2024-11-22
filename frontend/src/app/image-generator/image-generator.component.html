@@ -1,8 +1,20 @@
 <form class="form" (ngSubmit)="onSubmit()">
   @if(drawingEnabled()) {
-  <div class="example-button-row">
-    <button type="submit" mat-flat-button [disabled]="isLoading">
+  <div class="img-gen-container">
+    <button
+      type="submit"
+      mat-flat-button
+      [disabled]="isLoading || !base64Image"
+    >
       Generate Image based on drawing
+    </button>
+    <button
+      type="button"
+      mat-button
+      (click)="clearDrawing()"
+      [disabled]="isLoading || !base64Image"
+    >
+      Clear Canvas
     </button>
   </div>
   } @else {

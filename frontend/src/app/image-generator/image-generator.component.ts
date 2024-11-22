@@ -1,4 +1,4 @@
-import { Component, OnInit, input, output } from '@angular/core';
+import { Component, OnInit, ViewChild, input, output } from '@angular/core';
 import { ImageService } from '../services/image-service.service.js';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -20,6 +20,7 @@ import { CanvasComponent } from '../canvas/canvas.component.js';
   styleUrl: './image-generator.component.scss',
 })
 export class ImageGeneratorComponent implements OnInit {
+  @ViewChild(CanvasComponent) canvasComponent: CanvasComponent | undefined;
   readonly drawingEnabled = input<boolean>(false);
   resetDrawingMode = output<void>();
   base64Image: string = '';
@@ -94,6 +95,10 @@ export class ImageGeneratorComponent implements OnInit {
       ...opts,
       particleCount: Math.floor(count * particleRatio),
     });
+  }
+
+  clearDrawing() {
+    this.canvasComponent?.clearCanvas();
   }
 
   showConfetti() {

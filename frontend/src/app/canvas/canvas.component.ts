@@ -41,6 +41,12 @@ export class CanvasComponent implements AfterViewInit {
     this.captureEvents(canvasEl);
   }
 
+  public clearCanvas() {
+    const canvasEl: HTMLCanvasElement = this.canvas?.nativeElement;
+    this.cx?.clearRect(0, 0, canvasEl.width, canvasEl.height);
+    this.base64Image.emit('');
+  }
+
   private captureEvents(canvasEl: HTMLCanvasElement) {
     // this will capture all mousedown events from the canvas element
     fromEvent(canvasEl, 'mousedown')
