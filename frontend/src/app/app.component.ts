@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DialogueComponent } from './dialogue/dialogue.component';
 import { ApiService } from './services/api.service';
+import { ImageService } from './services/image-service.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,10 @@ export class AppComponent {
   prompt: string = '';
   imageUrl: string | null = null;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private imageService: ImageService
+  ) {}
 
   sendMessage() {
     if (!this.message || this.message.trim() === '') {
@@ -46,7 +50,7 @@ export class AppComponent {
 
     this.apiService.generateImage(prompt).subscribe(
       (response: any) => {
-        this.imageUrl = response.imageUrl;
+        this.imageService.currentImageUrl.update(() => response.imageUrl);
       },
       (error: any) => {
         console.error('Error generating image:', error);
