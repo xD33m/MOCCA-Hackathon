@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Image } from '../models/image.js';
 import { CanvasComponent } from '../canvas/canvas.component.js';
+import { FadeInImageDirective } from '../directives/fade-in-image.directive.js';
 @Component({
   selector: 'app-image-generator',
   imports: [
@@ -14,6 +15,7 @@ import { CanvasComponent } from '../canvas/canvas.component.js';
     MatInputModule,
     MatButtonModule,
     CanvasComponent,
+    FadeInImageDirective,
   ],
   templateUrl: './image-generator.component.html',
   styleUrl: './image-generator.component.scss',

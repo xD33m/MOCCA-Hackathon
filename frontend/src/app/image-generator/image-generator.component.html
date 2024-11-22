@@ -48,7 +48,7 @@
     <h2>Generating Image...</h2>
   </div>
   <div *ngIf="currentImage.url">
-    <img [src]="currentImage.url" alt="Generated Image" />
+    <img appFadeInImage [src]="currentImage.url" alt="Generated Image" />
   </div>
   <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 </div>
