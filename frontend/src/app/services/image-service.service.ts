@@ -1,7 +1,7 @@
 // src/app/services/image.service.ts
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, finalize, map, Observable, of, tap } from 'rxjs';
+import { catchError, delay, finalize, map, Observable, of, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import { Image } from '../models/image';
 import { ConfettiService } from './confetti.service';
@@ -50,6 +50,9 @@ export class ImageService {
       url: '',
     });
     return this.apiService.generateImage(prompt).pipe(
+      finalize(() => this.isLoading.set(false)),
+      tap(() => this.confettiService.showConfetti()),
+      delay(200),
       map((response: any) => {
         const imageUrl: string = response.imageUrl;
         this.imageUrls.set([{ url: imageUrl, prompt }, ...this.imageUrls()]);
@@ -57,12 +60,10 @@ export class ImageService {
         this.currentImage.set({ url: imageUrl, prompt });
         return imageUrl;
       }),
-      tap(() => this.confettiService.showConfetti()),
       catchError((error: string) => {
         console.error('Error generating image:', error);
         return error;
-      }),
-      finalize(() => this.isLoading.set(false))
+      })
     );
   }
 
@@ -73,6 +74,9 @@ export class ImageService {
       url: '',
     });
     return this.apiService.generateImageFromDrawing(base64Image).pipe(
+      finalize(() => this.isLoading.set(false)),
+      tap(() => this.confettiService.showConfetti()),
+      delay(200),
       map((response: any) => {
         const imageUrl = response.imageUrl;
         const imageToSave = { url: imageUrl, prompt: 'ChatGPTs Creation' };
@@ -81,12 +85,10 @@ export class ImageService {
         this.currentImage.set(imageToSave);
         return imageUrl;
       }),
-      tap(() => this.confettiService.showConfetti()),
       catchError((error: string) => {
         console.error('Error generating image from drawing:', error);
         return error;
-      }),
-      finalize(() => this.isLoading.set(false))
+      })
     );
   }
 
