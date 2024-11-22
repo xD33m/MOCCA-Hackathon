@@ -31,6 +31,13 @@ $dark-gray: #aaaaaa; // Dark gray for placeholders
     flex-grow: 1;
     text-align: center;
     font-family: Cinzel;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    img {
+      margin-left: 24px;
+    }
   }
 
   .microphone {
