@@ -36,6 +36,10 @@ export class ImageGeneratorComponent implements OnInit {
     return this.imageService.isLoading();
   }
 
+  get isChristmas(): boolean {
+    return this.imageService.loadChristmas();
+  }
+
   constructor(private imageService: ImageService) {}
 
   ngOnInit() {}

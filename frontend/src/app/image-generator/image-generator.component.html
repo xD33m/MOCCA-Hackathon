@@ -47,6 +47,11 @@
     <img class="spinner" src="assets/Bild.png" />
     <h2>Generating Image...</h2>
   </div>
+  @if(isChristmas) {
+  <video class="christmas-video" width="512" height="512" autoplay>
+    <source src="assets/christmas.mp4" type="video/mp4" />
+  </video>
+  }
   <div *ngIf="currentImage.url">
     <img appFadeInImage [src]="currentImage.url" alt="Generated Image" />
   </div>

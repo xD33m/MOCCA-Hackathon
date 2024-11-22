@@ -1,7 +1,14 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  output,
+  Renderer2,
+} from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FloatingImageComponent } from '../floating-image/floating-image.component';
 import { FormsModule } from '@angular/forms';
+import { ImageService } from '../services/image-service.service';
 
 @Component({
   selector: 'app-christmas',
@@ -11,11 +18,16 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./christmas.component.scss'],
 })
 export class ChristmasComponent implements OnInit {
+  isChristmasEnabled = output<boolean>();
   chistmasEnabled: boolean = false;
   images = this.getNumberArray(1, 20);
   private animationFrameId: number | null = null;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+    private imageService: ImageService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -29,8 +41,10 @@ export class ChristmasComponent implements OnInit {
 
     if (this.chistmasEnabled && rgbText) {
       this.activateRgbEffect(rgbText);
+      this.imageService.loadChristmas.set(true);
     } else {
       this.deactivateRgbEffect();
+      this.imageService.loadChristmas.set(false);
     }
   }
 

@@ -16,6 +16,7 @@ export class ImageService {
   private imageUrls: WritableSignal<Image[]> = signal([]);
   private readonly storageKey = 'generatedImages';
   public isLoading: WritableSignal<boolean> = signal(false);
+  public loadChristmas: WritableSignal<boolean> = signal(false);
 
   constructor(
     private apiService: ApiService,
@@ -50,7 +51,10 @@ export class ImageService {
       url: '',
     });
     return this.apiService.generateImage(prompt).pipe(
-      finalize(() => this.isLoading.set(false)),
+      finalize(() => {
+        this.isLoading.set(false);
+        this.loadChristmas.set(false);
+      }),
       tap(() => this.confettiService.showConfetti()),
       delay(200),
       map((response: any) => {
@@ -74,7 +78,10 @@ export class ImageService {
       url: '',
     });
     return this.apiService.generateImageFromDrawing(base64Image).pipe(
-      finalize(() => this.isLoading.set(false)),
+      finalize(() => {
+        this.isLoading.set(false);
+        this.loadChristmas.set(false);
+      }),
       tap(() => this.confettiService.showConfetti()),
       delay(200),
       map((response: any) => {
