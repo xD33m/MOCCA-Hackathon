@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  Inject,
   OnInit,
   output,
   Renderer2,
@@ -9,6 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FloatingImageComponent } from '../floating-image/floating-image.component';
 import { FormsModule } from '@angular/forms';
 import { ImageService } from '../services/image-service.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-christmas',
@@ -26,7 +28,8 @@ export class ChristmasComponent implements OnInit {
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
-    private imageService: ImageService
+    private imageService: ImageService,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit(): void {}
@@ -42,9 +45,11 @@ export class ChristmasComponent implements OnInit {
     if (this.chistmasEnabled && rgbText) {
       this.activateRgbEffect(rgbText);
       this.imageService.loadChristmas.set(true);
+      this.renderer.addClass(this.document.body, 'christmas-mode');
     } else {
       this.deactivateRgbEffect();
       this.imageService.loadChristmas.set(false);
+      this.renderer.removeClass(this.document.body, 'christmas-mode');
     }
   }
 
