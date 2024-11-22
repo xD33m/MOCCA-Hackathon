@@ -17,6 +17,7 @@ export class DialogueComponent {
   constructor(public voiceService: VoiceCommandService) {
     this.voiceService.command$.subscribe((command) => {
       this.commandChange.emit(command);
+      this.resetDrawingMode();
     });
   }
 

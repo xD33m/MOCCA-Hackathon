@@ -1,7 +1,7 @@
 // src/app/services/image.service.ts
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, finalize, map, Observable, of, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import { Image } from '../models/image';
 import { ConfettiService } from './confetti.service';
@@ -15,6 +15,7 @@ export class ImageService {
   });
   private imageUrls: WritableSignal<Image[]> = signal([]);
   private readonly storageKey = 'generatedImages';
+  public isLoading: WritableSignal<boolean> = signal(false);
 
   constructor(
     private apiService: ApiService,
@@ -43,6 +44,11 @@ export class ImageService {
       return of('Prompt cannot be empty.');
     }
 
+    this.isLoading.set(true);
+    this.currentImage.set({
+      prompt: '',
+      url: '',
+    });
     return this.apiService.generateImage(prompt).pipe(
       map((response: any) => {
         const imageUrl: string = response.imageUrl;
@@ -55,11 +61,17 @@ export class ImageService {
       catchError((error: string) => {
         console.error('Error generating image:', error);
         return error;
-      })
+      }),
+      finalize(() => this.isLoading.set(false))
     );
   }
 
   generateImageFromDrawing(base64Image: string): Observable<string> {
+    this.isLoading.set(true);
+    this.currentImage.set({
+      prompt: '',
+      url: '',
+    });
     return this.apiService.generateImageFromDrawing(base64Image).pipe(
       map((response: any) => {
         const imageUrl = response.imageUrl;
@@ -73,7 +85,8 @@ export class ImageService {
       catchError((error: string) => {
         console.error('Error generating image from drawing:', error);
         return error;
-      })
+      }),
+      finalize(() => this.isLoading.set(false))
     );
   }
 

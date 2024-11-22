@@ -24,12 +24,16 @@ export class ImageGeneratorComponent implements OnInit {
   resetDrawingMode = output<void>();
   base64Image: string = '';
   prompt: string = '';
-  isLoading: boolean = false;
   errorMessage: string = '';
 
   get currentImage(): Image {
     return this.imageService.currentImage();
   }
+
+  get imageServiceLoading(): boolean {
+    return this.imageService.isLoading();
+  }
+
   constructor(private imageService: ImageService) {}
 
   ngOnInit() {}
@@ -45,16 +49,11 @@ export class ImageGeneratorComponent implements OnInit {
       return;
     }
 
-    this.isLoading = true;
     this.errorMessage = '';
 
     if (this.drawingEnabled()) {
       this.imageService.generateImageFromDrawing(this.base64Image).subscribe({
-        next: () => {
-          this.isLoading = false;
-        },
         error: (error: string) => {
-          this.isLoading = false;
           this.errorMessage = 'Error generating image';
           console.error(error);
         },
@@ -67,11 +66,9 @@ export class ImageGeneratorComponent implements OnInit {
 
     this.imageService.generateImage(this.prompt).subscribe({
       next: () => {
-        this.isLoading = false;
         this.prompt = '';
       },
       error: (error: string) => {
-        this.isLoading = false;
         this.errorMessage = 'Error generating image';
         console.error(error);
       },

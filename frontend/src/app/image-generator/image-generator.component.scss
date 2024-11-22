@@ -19,6 +19,7 @@
   padding: 20px 0px;
 }
 .image-container {
+  position: relative;
   width: 512px;
   height: 512px;
   overflow: hidden;
@@ -32,4 +33,31 @@
 .img-gen-container {
   display: flex;
   gap: 20px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-container {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  .spinner {
+    animation: spin 1s linear infinite;
+    width: 200px;
+    height: 200px;
+  }
 }

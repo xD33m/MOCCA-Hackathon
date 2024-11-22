@@ -42,6 +42,7 @@ export async function generateImage(prompt: string): Promise<string> {
 
 	try {
 		if (process.env.ENV !== 'prod') {
+			await new Promise((resolve) => setTimeout(resolve, 2000));
 			const randomId = Math.floor(Math.random() * 50);
 			return `https://picsum.photos/id/${randomId}/512/512`;
 		}
@@ -65,6 +66,7 @@ export async function generateImageFromDrawing(base64Image: string): Promise<str
 	}
 
 	if (process.env.ENV !== 'prod') {
+		await new Promise((resolve) => setTimeout(resolve, 2000));
 		const randomId = Math.floor(Math.random() * 50);
 		return `https://picsum.photos/id/${randomId}/512/512`;
 	}

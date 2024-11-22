@@ -4,7 +4,7 @@
     <button
       type="submit"
       mat-flat-button
-      [disabled]="isLoading || !base64Image"
+      [disabled]="imageServiceLoading || !base64Image"
     >
       Generate Image based on drawing
     </button>
@@ -12,7 +12,7 @@
       type="button"
       mat-button
       (click)="clearDrawing()"
-      [disabled]="isLoading || !base64Image"
+      [disabled]="imageServiceLoading || !base64Image"
     >
       Clear Canvas
     </button>
@@ -31,7 +31,7 @@
     />
   </mat-form-field>
   <div class="example-button-row">
-    <button type="submit" mat-flat-button [disabled]="isLoading">
+    <button type="submit" mat-flat-button [disabled]="imageServiceLoading">
       Generate Image
     </button>
   </div>
@@ -43,7 +43,10 @@
     *ngIf="drawingEnabled()"
     (base64Image)="updateDrawing($event)"
   ></app-canvas>
-  <div *ngIf="isLoading">Generating image...</div>
+  <div *ngIf="imageServiceLoading" class="spinner-container">
+    <img class="spinner" src="assets/Bild.png" />
+    <h2>Generating Image...</h2>
+  </div>
   <div *ngIf="currentImage.url">
     <img [src]="currentImage.url" alt="Generated Image" />
   </div>
