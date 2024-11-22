@@ -1,9 +1,10 @@
 // src/app/services/image.service.ts
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import { Image } from '../models/image';
+import { ConfettiService } from './confetti.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +16,10 @@ export class ImageService {
   private imageUrls: WritableSignal<Image[]> = signal([]);
   private readonly storageKey = 'generatedImages';
 
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private confettiService: ConfettiService
+  ) {
     this.loadImagesFromStorage();
   }
 
@@ -47,6 +51,7 @@ export class ImageService {
         this.currentImage.set({ url: imageUrl, prompt });
         return imageUrl;
       }),
+      tap(() => this.confettiService.showConfetti()),
       catchError((error: string) => {
         console.error('Error generating image:', error);
         return error;
@@ -64,6 +69,7 @@ export class ImageService {
         this.currentImage.set(imageToSave);
         return imageUrl;
       }),
+      tap(() => this.confettiService.showConfetti()),
       catchError((error: string) => {
         console.error('Error generating image from drawing:', error);
         return error;

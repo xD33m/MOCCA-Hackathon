@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import confetti from 'canvas-confetti';
 import { Image } from '../models/image.js';
 import { CanvasComponent } from '../canvas/canvas.component.js';
 @Component({
@@ -53,7 +52,6 @@ export class ImageGeneratorComponent implements OnInit {
       this.imageService.generateImageFromDrawing(this.base64Image).subscribe({
         next: () => {
           this.isLoading = false;
-          this.showConfetti();
         },
         error: (error: string) => {
           this.isLoading = false;
@@ -71,7 +69,6 @@ export class ImageGeneratorComponent implements OnInit {
       next: () => {
         this.isLoading = false;
         this.prompt = '';
-        this.showConfetti();
       },
       error: (error: string) => {
         this.isLoading = false;
@@ -85,44 +82,7 @@ export class ImageGeneratorComponent implements OnInit {
     this.base64Image = base64image;
   }
 
-  fire(particleRatio: number, opts: any) {
-    const count = 200;
-    const defaults = {
-      origin: { y: 0.5 },
-    };
-    confetti({
-      ...defaults,
-      ...opts,
-      particleCount: Math.floor(count * particleRatio),
-    });
-  }
-
   clearDrawing() {
     this.canvasComponent?.clearCanvas();
-  }
-
-  showConfetti() {
-    setTimeout(() => {
-      this.fire(0.25, {
-        spread: 26,
-        startVelocity: 55,
-      });
-      this.fire(0.2, {
-        spread: 60,
-      });
-      this.fire(0.35, {
-        spread: 100,
-        scalar: 0.8,
-      });
-      this.fire(0.1, {
-        spread: 120,
-        startVelocity: 25,
-        scalar: 1.2,
-      });
-      this.fire(0.1, {
-        spread: 120,
-        startVelocity: 45,
-      });
-    }, 500);
   }
 }
