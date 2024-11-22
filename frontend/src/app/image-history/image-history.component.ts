@@ -20,6 +20,7 @@ export class ImageHistoryComponent {
 
   show(index: number) {
     this.imageService.currentImage.set(this.images[index]);
+    this.imageService.loadChristmas.set(false);
   }
 
   clearImages() {
