@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import confetti from 'canvas-confetti';
+import { Image } from '../models/image.js';
 @Component({
   selector: 'app-image-generator',
   imports: [FormsModule, CommonModule, MatInputModule, MatButtonModule],
@@ -16,8 +17,8 @@ export class ImageGeneratorComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string = '';
 
-  get currentImageUrl(): string {
-    return this.imageService.currentImageUrl();
+  get currentImage(): Image {
+    return this.imageService.currentImage();
   }
   constructor(private imageService: ImageService) {}
 

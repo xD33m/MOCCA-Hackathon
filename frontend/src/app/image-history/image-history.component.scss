@@ -13,6 +13,9 @@
 .image-item {
   flex: 1 0 21%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image-item img {

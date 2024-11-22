@@ -6,8 +6,9 @@
     </button>
   </h2>
   <div class="image-gallery">
-    <div *ngFor="let url of images; let i = index" class="image-item">
-      <img (click)="show(i)" [src]="url" alt="Generated Image" />
+    <div *ngFor="let img of images; let i = index" class="image-item">
+      <img (click)="show(i)" [src]="img.url" alt="Generated Image" />
+      <p class="text-center">{{ img.prompt }}</p>
     </div>
   </div>
 </div>

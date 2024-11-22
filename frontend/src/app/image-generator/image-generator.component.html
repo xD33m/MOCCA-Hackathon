@@ -18,8 +18,9 @@
 
 <div class="image-container">
   <div *ngIf="isLoading">Generating image...</div>
-  <div *ngIf="currentImageUrl">
-    <img [src]="currentImageUrl" alt="Generated Image" />
+  <div *ngIf="currentImage.url">
+    <img [src]="currentImage.url" alt="Generated Image" />
   </div>
   <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 </div>
+<h3 class="text-center b">{{ currentImage.prompt }}</h3>

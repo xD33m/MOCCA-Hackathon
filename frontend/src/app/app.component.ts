@@ -48,13 +48,6 @@ export class AppComponent {
     this.prompt = prompt;
     console.log('Sending command ', prompt);
 
-    this.apiService.generateImage(prompt).subscribe(
-      (response: any) => {
-        this.imageService.currentImageUrl.update(() => response.imageUrl);
-      },
-      (error: any) => {
-        console.error('Error generating image:', error);
-      }
-    );
+    this.imageService.generateImage(prompt).subscribe();
   }
 }
