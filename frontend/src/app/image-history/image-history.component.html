@@ -1,12 +1,7 @@
 <div>
-  <h2>
+  <h2 *ngIf="images && images.length > 0">
     Your Artwork:
-    <button
-      *ngIf="images && images.length > 0"
-      mat-button
-      mat-secondary
-      (click)="clearImages()"
-    >
+    <button mat-button mat-secondary (click)="clearImages()">
       Clear Images
     </button>
   </h2>
