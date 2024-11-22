@@ -49,7 +49,7 @@ export async function generateImage(prompt: string): Promise<string> {
 		const response = await openai.images.generate({
 			prompt: prompt,
 			n: 1,
-			size: '256x256',
+			size: '512x512',
 		});
 
 		// Return the URL of the generated image
