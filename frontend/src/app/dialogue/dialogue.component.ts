@@ -12,6 +12,7 @@ import { ImageHistoryComponent } from '../image-history/image-history.component'
 })
 export class DialogueComponent {
   @Output() commandChange = new EventEmitter<string>();
+  isDrawing = false;
 
   constructor(public voiceService: VoiceCommandService) {
     this.voiceService.command$.subscribe((command) => {
@@ -25,5 +26,13 @@ export class DialogueComponent {
     } else {
       this.voiceService.startListening();
     }
+  }
+
+  toggleDrawing(): void {
+    this.isDrawing = !this.isDrawing;
+  }
+
+  resetDrawingMode(): void {
+    this.isDrawing = false;
   }
 }

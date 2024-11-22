@@ -54,6 +54,23 @@ export class ImageService {
     );
   }
 
+  generateImageFromDrawing(base64Image: string): Observable<string> {
+    return this.apiService.generateImageFromDrawing(base64Image).pipe(
+      map((response: any) => {
+        const imageUrl = response.imageUrl;
+        const imageToSave = { url: imageUrl, prompt: 'ChatGPTs Creation' };
+        this.imageUrls.set([imageToSave, ...this.imageUrls()]);
+        this.saveImagesToStorage();
+        this.currentImage.set(imageToSave);
+        return imageUrl;
+      }),
+      catchError((error: string) => {
+        console.error('Error generating image from drawing:', error);
+        return error;
+      })
+    );
+  }
+
   clearImages() {
     this.imageUrls.set([]);
     this.saveImagesToStorage();

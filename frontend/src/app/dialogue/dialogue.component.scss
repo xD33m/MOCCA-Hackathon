@@ -34,6 +34,7 @@ $dark-gray: #aaaaaa; // Dark gray for placeholders
   }
 
   .microphone {
+    cursor: pointer;
     background-color: #d9d9d9;
     border-radius: 50%;
     width: 80px;
@@ -42,8 +43,8 @@ $dark-gray: #aaaaaa; // Dark gray for placeholders
     align-items: center;
     justify-content: center;
     position: absolute;
-    left: 40px;
-    top: 60px;
+    left: 65px;
+    top: 40px;
     &.recording {
       border: 4px solid var(--mat-sys-error-container);
       img {
@@ -59,6 +60,24 @@ $dark-gray: #aaaaaa; // Dark gray for placeholders
       width: 36px;
       height: 36px;
       background: var(--mat-sys-error-container);
+    }
+  }
+
+  .pencil {
+    background-color: #d9d9d9;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 103px;
+    left: 15px;
+    img {
+      width: 30px;
+      height: 30px;
     }
   }
 }

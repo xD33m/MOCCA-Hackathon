@@ -8,7 +8,7 @@
 }
 
 .full-width {
-  width: 70%;
+  width: 60%;
 }
 
 .form {
@@ -19,15 +19,12 @@
   padding: 20px 0px;
 }
 .image-container {
-  width: 700px;
-  height: 400px;
-  aspect-ratio: 16/9;
+  width: 512px;
+  height: 512px;
   overflow: hidden;
   border: 10px solid var(--mat-sys-primary-container);
 
   img {
-    width: 100%;
-    aspect-ratio: 16/9;
     object-fit: scale-down;
   }
 }

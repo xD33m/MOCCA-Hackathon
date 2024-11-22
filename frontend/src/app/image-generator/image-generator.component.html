@@ -1,4 +1,11 @@
 <form class="form" (ngSubmit)="onSubmit()">
+  @if(drawingEnabled()) {
+  <div class="example-button-row">
+    <button type="submit" mat-flat-button [disabled]="isLoading">
+      Generate Image based on drawing
+    </button>
+  </div>
+  } @else {
   <mat-form-field class="full-width" appearance="outline">
     <mat-label>Prompt</mat-label>
     <input
@@ -12,11 +19,18 @@
     />
   </mat-form-field>
   <div class="example-button-row">
-    <button mat-flat-button [disabled]="isLoading">Generate Image</button>
+    <button type="submit" mat-flat-button [disabled]="isLoading">
+      Generate Image
+    </button>
   </div>
+  }
 </form>
 
 <div class="image-container">
+  <app-canvas
+    *ngIf="drawingEnabled()"
+    (base64Image)="updateDrawing($event)"
+  ></app-canvas>
   <div *ngIf="isLoading">Generating image...</div>
   <div *ngIf="currentImage.url">
     <img [src]="currentImage.url" alt="Generated Image" />

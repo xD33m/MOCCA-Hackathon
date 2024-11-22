@@ -13,6 +13,9 @@
   >
     <img src="assets/microphone-icon.png" alt="Microphone Icon" />
   </div>
+  <div class="pencil" (click)="toggleDrawing()">
+    <img src="assets/pencil.png" alt="Pencil Icon" />
+  </div>
   <div class="logo">DaVinciDialogue</div>
 </div>
 <div class="separador"></div>
@@ -20,6 +23,10 @@
 
 <div class="content-container">
   <div class="left-side"></div>
-  <app-image-generator class="main-content"></app-image-generator>
+  <app-image-generator
+    (resetDrawingMode)="resetDrawingMode()"
+    [drawingEnabled]="isDrawing"
+    class="main-content"
+  ></app-image-generator>
   <app-image-history class="history"></app-image-history>
 </div>

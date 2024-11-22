@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import axios from "axios";
 import OpenAI from 'openai';
 import { ChatMessage } from '../types/chatgpt.js';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const openai = new OpenAI({
 	organization: 'org-vNxy6DD6IEOrPLDlw6qENMzR',
@@ -39,18 +41,58 @@ export async function generateImage(prompt: string): Promise<string> {
 	}
 
 	try {
-		const randomId = Math.floor(Math.random() * 50);
-		return `https://picsum.photos/id/${randomId}/680/382`;
-		// const response = await openai.images.generate({
-		//     prompt: prompt,
-		//     n: 1,
-		//     size: '256x256',
-		// });
+		if (process.env.ENV !== 'prod') {
+			const randomId = Math.floor(Math.random() * 50);
+			return `https://picsum.photos/id/${randomId}/512/512`;
+		}
+		const response = await openai.images.generate({
+			prompt: prompt,
+			n: 1,
+			size: '256x256',
+		});
 
-		// // Return the URL of the generated image
-		// return response.data[0].url;
+		// Return the URL of the generated image
+		return response.data[0].url;
 	} catch (error: any) {
 		console.error('Error generating image:', error.response?.data || error.message);
+		throw new Error(error.response?.data?.error?.message || 'Image generation error');
+	}
+}
+
+export async function generateImageFromDrawing(base64Image: string): Promise<string> {
+	if (!process.env.OPENAI_API_KEY) {
+		throw new Error('OpenAI API key is not configured in the environment.');
+	}
+
+	if (process.env.ENV !== 'prod') {
+		const randomId = Math.floor(Math.random() * 50);
+		return `https://picsum.photos/id/${randomId}/512/512`;
+	}
+
+	const imageBuffer = Buffer.from(base64Image, 'base64');
+	const file: any = imageBuffer;
+	file.name = 'temp_image.png';
+	const __filename = fileURLToPath(import.meta.url);
+	const __dirname = dirname(__filename);
+	const tempImagePath = join(__dirname, 'temp_image.png');
+	fs.writeFileSync(tempImagePath, imageBuffer);
+
+	try {
+		const response = await openai.images.edit({
+			image: fs.createReadStream(tempImagePath) as any,
+			prompt: 'This drawing represents a hand drawn representation of something real. Turn this hand-drawn sketch into a realistic image',
+			n: 1,
+			size: '512x512',
+		});
+
+		fs.unlinkSync(tempImagePath);
+
+		return response.data[0].url;
+	} catch (error: any) {
+		fs.unlinkSync(tempImagePath);
+
+		console.log(error);
+		console.error('Error generating image variation:', error.response?.data || error.message);
 		throw new Error(error.response?.data?.error?.message || 'Image generation error');
 	}
 }

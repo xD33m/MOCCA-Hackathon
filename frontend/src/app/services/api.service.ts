@@ -18,4 +18,8 @@ export class ApiService {
   generateImage(prompt: string) {
     return this.http.post('/api/generate-image', { prompt });
   }
+
+  generateImageFromDrawing(image: string) {
+    return this.http.post('/api/generate-image-from-drawing', { image });
+  }
 }

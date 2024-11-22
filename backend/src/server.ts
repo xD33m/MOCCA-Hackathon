@@ -15,13 +15,12 @@ app.use(express.json());
 app.use('/api', chatRoutes);
 
 app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello from the backend! ' + process.env.ENV });
+	res.json({ message: 'Hello from the backend! ' + process.env.ENV });
 });
 
 server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+	console.log(`Server is running on port ${port}`);
 });
-
 
 process.on('SIGINT', function () {
 	console.log('\nGracefully shutting down');
