@@ -1,7 +1,12 @@
-<div *ngIf="imageUrls && imageUrls.length > 0">
-  <h2>Generated Images:</h2>
+<div *ngIf="images && images.length > 0">
+  <h2>
+    Generated Images:
+    <button mat-button mat-secondary (click)="clearImages()">
+      Clear Images
+    </button>
+  </h2>
   <div class="image-gallery">
-    <div *ngFor="let url of imageUrls; let i = index" class="image-item">
+    <div *ngFor="let url of images; let i = index" class="image-item">
       <img (click)="show(i)" [src]="url" alt="Generated Image" />
     </div>
   </div>

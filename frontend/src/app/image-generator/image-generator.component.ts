@@ -31,13 +31,13 @@ export class ImageGeneratorComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
     this.imageService.generateImage(this.prompt).subscribe({
-      next: (imageUrl: string) => {
+      next: () => {
         this.isLoading = false;
         this.prompt = '';
       },
       error: (error: string) => {
         this.isLoading = false;
-        this.errorMessage = 'Error generating image. Please try again.';
+        this.errorMessage = 'Error generating image';
         console.error(error);
       },
     });
