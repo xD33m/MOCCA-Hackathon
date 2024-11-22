@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import confetti from 'canvas-confetti';
 @Component({
   selector: 'app-image-generator',
   imports: [FormsModule, CommonModule, MatInputModule, MatButtonModule],
@@ -34,6 +35,7 @@ export class ImageGeneratorComponent implements OnInit {
       next: () => {
         this.isLoading = false;
         this.prompt = '';
+        this.showConfetti();
       },
       error: (error: string) => {
         this.isLoading = false;
@@ -41,5 +43,42 @@ export class ImageGeneratorComponent implements OnInit {
         console.error(error);
       },
     });
+  }
+
+  fire(particleRatio: number, opts: any) {
+    const count = 200;
+    const defaults = {
+      origin: { y: 0.5 },
+    };
+    confetti({
+      ...defaults,
+      ...opts,
+      particleCount: Math.floor(count * particleRatio),
+    });
+  }
+
+  showConfetti() {
+    setTimeout(() => {
+      this.fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+      });
+      this.fire(0.2, {
+        spread: 60,
+      });
+      this.fire(0.35, {
+        spread: 100,
+        scalar: 0.8,
+      });
+      this.fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        scalar: 1.2,
+      });
+      this.fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+      });
+    }, 500);
   }
 }
