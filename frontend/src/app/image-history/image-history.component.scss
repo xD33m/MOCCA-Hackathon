@@ -7,7 +7,7 @@
   margin-top: 20px;
   max-height: 800px;
   max-width: 400px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .image-item {
@@ -21,4 +21,30 @@
   display: block;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: none;
+  border-radius: 10px;
+  background-color: var(--mat-sys-primary-container);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
