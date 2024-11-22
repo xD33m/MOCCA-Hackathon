@@ -1,0 +1,17 @@
+.christmas-toggle {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  float: right;
+  z-index: 1000;
+  padding: 10px 10px 0px 0px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.rgb-text {
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  transform: translateX(-50%) translateY(-50%);
+}

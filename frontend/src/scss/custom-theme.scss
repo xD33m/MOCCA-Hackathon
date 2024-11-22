@@ -22,26 +22,26 @@ html {
     )
   );
 
-  // Use high contrast light theme colors when users prefer contrast
-  @media (prefers-contrast: more) {
-    @include DaVinciDialogueTheme.high-contrast-overrides(light);
-  }
+  // // Use high contrast light theme colors when users prefer contrast
+  // @media (prefers-contrast: more) {
+  //   @include DaVinciDialogueTheme.high-contrast-overrides(light);
+  // }
 
-  // Apply dark theme when users prefer a dark color scheme
-  @media (prefers-color-scheme: dark) {
-    @include mat.theme(
-      (
-        color: (
-          primary: DaVinciDialogueTheme.$primary-palette,
-          tertiary: DaVinciDialogueTheme.$tertiary-palette,
-          theme-type: dark,
-        ),
-      )
-    );
+  // // Apply dark theme when users prefer a dark color scheme
+  // @media (prefers-color-scheme: dark) {
+  //   @include mat.theme(
+  //     (
+  //       color: (
+  //         primary: DaVinciDialogueTheme.$primary-palette,
+  //         tertiary: DaVinciDialogueTheme.$tertiary-palette,
+  //         theme-type: dark,
+  //       ),
+  //     )
+  //   );
 
-    // Use high contrast dark theme colors when users prefers a dark color scheme and contrast
-    @media (prefers-contrast: more) {
-      @include DaVinciDialogueTheme.high-contrast-overrides(dark);
-    }
-  }
+  //   // Use high contrast dark theme colors when users prefers a dark color scheme and contrast
+  //   @media (prefers-contrast: more) {
+  //     @include DaVinciDialogueTheme.high-contrast-overrides(dark);
+  //   }
+  // }
 }

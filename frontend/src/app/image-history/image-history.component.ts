@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-image-history',
   imports: [FormsModule, CommonModule],
   templateUrl: './image-history.component.html',
-  styleUrl: './image-history.component.scss'
+  styleUrl: './image-history.component.scss',
 })
 export class ImageHistoryComponent {
   imageUrls: string[] = [];
@@ -16,8 +16,7 @@ export class ImageHistoryComponent {
     this.imageUrls = this.imageService.getImages().slice(1);
   }
 
-  clearHistory() {
-    this.imageService.clearHistory();
-    this.imageUrls = [];
+  show(index: number) {
+    this.imageService.currentImageUrl.set(this.imageUrls[index]);
   }
 }

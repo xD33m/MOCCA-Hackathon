@@ -1,14 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DialogueComponent } from './dialogue/dialogue.component';
-
 @Component({
   selector: 'app-root',
-  imports: [MatButtonModule, FormsModule, DialogueComponent],
+  imports: [FormsModule, DialogueComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -1,14 +1,25 @@
-
-<form (ngSubmit)="onSubmit()">
-  <label for="prompt">Enter Image Prompt:</label>
-  <input type="text" id="prompt" [(ngModel)]="prompt" name="prompt" required />
-  <button type="submit" [disabled]="isLoading">Generate Image</button>
+<form class="form" (ngSubmit)="onSubmit()">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Prompt</mat-label>
+    <input
+      type="text"
+      id="prompt"
+      [(ngModel)]="prompt"
+      name="prompt"
+      required
+      matInput
+      placeholder="Describe the image you want to generate"
+    />
+  </mat-form-field>
+  <div class="example-button-row">
+    <button mat-flat-button [disabled]="isLoading">Generate Image</button>
+  </div>
 </form>
 
 <div class="image-container">
-    <div *ngIf="isLoading">Generating image...</div>
-    <div *ngIf="imageUrl">
-      <img [src]="imageUrl" alt="Generated Image" />
-    </div>
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div *ngIf="isLoading">Generating image...</div>
+  <div *ngIf="currentImageUrl">
+    <img [src]="currentImageUrl" alt="Generated Image" />
+  </div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 </div>

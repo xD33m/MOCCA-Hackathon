@@ -3,16 +3,31 @@
   margin-top: 10px;
 }
 
-.image-container {
-    width: 700px;
-    height: 400px;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    border: 10px solid var(--mat-sys-primary-container);
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
 
-    img {
-        width: 100%;
-        aspect-ratio: 16/9;
-        object-fit: scale-down;
-    }
+.full-width {
+  width: 70%;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0px;
+}
+.image-container {
+  width: 700px;
+  height: 400px;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border: 10px solid var(--mat-sys-primary-container);
+
+  img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: scale-down;
+  }
 }

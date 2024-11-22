@@ -1,0 +1,11 @@
+<div>
+  <p class="christmas-toggle">
+    <mat-slide-toggle [(ngModel)]="chistmasEnabled" (change)="toggleRgb()">
+      <span class="rgb-text">Christmas Mode!</span>
+    </mat-slide-toggle>
+  </p>
+
+  @if(chistmasEnabled){ @for(image of images; track image){
+  <app-floating-image></app-floating-image>
+  } }
+</div>

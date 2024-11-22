@@ -2,24 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { ImageService } from '../services/image-service.service.js';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-image-generator',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, MatInputModule, MatButtonModule],
   templateUrl: './image-generator.component.html',
-  styleUrl: './image-generator.component.scss'
+  styleUrl: './image-generator.component.scss',
 })
 export class ImageGeneratorComponent implements OnInit {
   prompt: string = '';
   isLoading: boolean = false;
   errorMessage: string = '';
-  imageUrl: string = "";
 
-  constructor(private imageService: ImageService) { }
-
-  ngOnInit() {
-    this.imageUrl = this.imageService.getImages()?.[0] ?? "https://preview.redd.it/swjlpm53dcp61.jpg?auto=webp&s=d50c5025e673641c28f0cb45cf0be387c1cf828f";
+  get currentImageUrl(): string {
+    return this.imageService.currentImageUrl();
   }
+  constructor(private imageService: ImageService) {}
+
+  ngOnInit() {}
 
   onSubmit() {
     if (!this.prompt.trim()) {
@@ -38,7 +39,7 @@ export class ImageGeneratorComponent implements OnInit {
         this.isLoading = false;
         this.errorMessage = 'Error generating image. Please try again.';
         console.error(error);
-      }
+      },
     });
   }
 }
