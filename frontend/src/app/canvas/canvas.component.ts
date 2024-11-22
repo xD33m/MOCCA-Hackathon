@@ -12,8 +12,11 @@ import { switchMap, takeUntil, pairwise } from 'rxjs/operators';
 
 @Component({
   selector: 'app-canvas',
-  template: '<canvas #canvas></canvas>',
-  styles: ['canvas { border: 1px solid #000; background: transparent}'],
+  template: '<div class="bg"><canvas #canvas></canvas></div>',
+  styles: [
+    'canvas { border: 1px solid #000; background: transparent}',
+    '.bg { background: #fff; }',
+  ],
 })
 export class CanvasComponent implements AfterViewInit {
   base64Image = output<string>();
